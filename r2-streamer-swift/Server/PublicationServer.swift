@@ -226,11 +226,7 @@ public class PublicationServer: ResourcesServer {
                 href = href.removingPercentEncoding ?? href
             }
             
-            print("TADAM resourceHandler-1: \(href)")
-
             let resource = publication.get(href.removingPercentEncoding ?? href)
-            
-            print("TADAM resourceHandler-2: \(resource.stream())")
             
             switch resource.stream() {
             case .success(let stream):
@@ -340,8 +336,6 @@ public class PublicationServer: ResourcesServer {
         
         resources[path] = url
         
-        print("TADAM serve resources[\(path)] = \(url)")
-        
         return baseURL.appendingPathComponent(String(path.dropFirst()))
     }
     
@@ -369,7 +363,6 @@ public class PublicationServer: ResourcesServer {
 //        log(.debug, "Serve resource `\(path)` (\(contentType))")
         
         assert(file.pathExtension.lowercased() != "css" || contentType == "text/css")
-        print("TADAM resourceHandler: \(file)")
         return GCDWebServerDataResponse(data: data, contentType: contentType)
     }
     
